@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="/src/css/portfolio.css">
+</head>
+<body>
+    <main class="page-shell">
+        <a class="back-link reveal" href="index.html">← 目次ページへ戻る</a>
+        <div class="layout-stack">
+            <section class="layout-grid-2">
+                <article class="panel reveal" style="--delay: 0.12s;">
+                    <h2>About Me</h2>
+                    <ul class="detail-list">
+                        <li>大阪大学大学院情報科学研究科 M1</li>
+                        <li>応用情報技術者試験 合格（2022年12月）</li>
+                        <li>TOEIC L&R 855（2024年6月）</li>
+                        <li>AtCoder Algorithm: 最高 1644 / 現在 1333</li>
+                        <li>AtCoder Heuristic: 最高 1876 / 現在 1885</li>
+                        <li>趣味: PCゲーム，ホラー映画/動画</li>
+                        <li>長所: 粘り強さ</li>
+                    </ul>
+                </article>
+
+                <article class="panel reveal" style="--delay: 0.2s;">
+                    <h2>Skills</h2>
+                    <div class="skills-group">
+                        <h3 class="section-subheading">Languages</h3>
+                        <div class="tag-wrap">
+                            <span>C++</span>
+                            <span>Python</span>
+                            <span>Java</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <h3 class="section-subheading">HPC</h3>
+                        <div class="tag-wrap">
+                            <span>Kokkos</span>
+                            <span>OpenMP</span>
+                            <span>SIMD</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <h3 class="section-subheading">Dev Tools</h3>
+                        <div class="tag-wrap">
+                            <span>Git</span>
+                            <span>Docker</span>
+                            <span>Linux</span>
+                            <span>CMake</span>
+                        </div>
+                    </div>
+                    <div class="skills-group">
+                        <h3 class="section-subheading">Problem Solving</h3>
+                        <div class="tag-wrap">
+                            <span>Algorithm</span>
+                            <span>Heuristics</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="layout-grid-2">
+                <article class="panel intro-card--career reveal" style="--delay: 0.22s;">
+                    <h2>Education</h2>
+                    <ul class="intro-career">
+                        <li>
+                            <span class="timeline-date">2021.04</span>
+                            <span class="timeline-item">大阪大学基礎工学部情報科学科 入学</span>
+                        </li>
+                        <li>
+                            <span class="timeline-date">2025.03</span>
+                            <span class="timeline-item">大阪大学基礎工学部情報科学科 卒業</span>
+                        </li>
+                        <li>
+                            <span class="timeline-date">2025.04</span>
+                            <span class="timeline-item">大阪大学大学院情報科学研究科コンピュータサイエンス専攻 入学</span>
+                        </li>
+                        <li>
+                            <span class="timeline-date">2027.03</span>
+                            <span class="timeline-item">大阪大学大学院情報科学研究科コンピュータサイエンス専攻 卒業見込み</span>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+
+            <section class="panel reveal" style="--delay: 0.46s;">
+                <h2>Activity Timeline</h2>
+                <ul class="timeline">
+                    <li>
+                        <span class="timeline-date">2021.07 - 2025.12</span>
+                        <span class="timeline-item">競技プログラミングの活動に熱中</span>
+                    </li>
+                    <li>
+                        <span class="timeline-date">2023.04 - Present</span>
+                        <span class="timeline-item">量子シミュレータ scaluq の開発に従事</span>
+                    </li>
+                    <li>
+                        <span class="timeline-date">2025.03</span>
+                        <span class="timeline-item">情報処理学会全国大会で研究発表</span>
+                    </li>
+                    <li>
+                        <span class="timeline-date">2025.08</span>
+                        <span class="timeline-item">SWoPP/HPC研究会で研究発表</span>
+                    </li>
+                    <li>
+                        <span class="timeline-date">2025.08</span>
+                        <span class="timeline-item">国際学会 SCA/HPCAsia 2026 でポスター発表（共著として参加）</span>
+                    </li>
+                    <li>
+                        <span class="timeline-date">2026.03</span>
+                        <span class="timeline-item">国際学会 CEFC に採択．発表に向けて準備中</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="panel reveal" style="--delay: 0.28s;">
+                <h2>Research</h2>
+                <ul class="detail-list">
+                    <li><strong>研究テーマ:</strong> ILUBiCG法における実部・虚部の独立な棄却による高速化</li>
+                    <li><strong>課題:</strong> 前処理行列を用いた計算時間とメモリ使用量が多い．絶対値の小さな要素を棄却することにより改善できるが，収束性が悪化</li>
+                    <li><strong>工夫:</strong> 応用で現れる行列の特徴（実部と虚部の絶対値の大きさ・非ゼロパターンに差）を利用</li>
+                    <li>
+                        <strong>成果:</strong>
+                        <ol class="detail-sublist">
+                            <li>行列ベクトル積を最大 3.5x，前進後退代入を最大 2.0x，係数行列のメモリを最大 38% 削減（CSR比）</li>
+                            <li>様々な問題で，提案する棄却が従来の棄却よりも収束性悪化を抑制</li>
+                        </ol>
+                    </li>
+                    <li><strong>発表:</strong> 情報処理学会全国大会，SWoPP/HPC研究会で発表．国際学会CEFC発表準備中</li>
+                </ul>
+                <iframe
+                    class="pdf-viewer"
+                    src="research.pdf#view=FitH"
+                    title="Research PDF"
+                    loading="lazy">
+                </iframe>
+                <p class="meta">
+                    pdfが表示できない場合は
+                    <a href="research.pdf" target="_blank" rel="noopener noreferrer">こちら</a>
+                    から開いてください．
+                </p>
+            </section>
+
+            <section class="panel reveal" style="--delay: 0.34s;">
+                <h2>Scaluq</h2>
+                <p>
+                    <a href="https://github.com/qulacs/scaluq" target="_blank" rel="noopener noreferrer">scaluq</a>
+                    は，量子回路シミュレーションを高速に行う OSS です．
+                    私は主に機能拡張を担当しています．
+                </p>
+                <h3 class="section-subheading">担当した機能</h3>
+                <ul class="detail-list task-list">
+                    <li>
+                        任意個の制御ビットを扱えるゲート機能の実装
+                        （<a href="https://github.com/qulacs/scaluq/pull/147" target="_blank" rel="noopener noreferrer">PR #147</a>,
+                        <a href="https://github.com/qulacs/scaluq/issues/138" target="_blank" rel="noopener noreferrer">Issue #138</a>）
+                    </li>
+                    <li>
+                        開発者用実行時間計測ツールの導入
+                        （<a href="https://github.com/qulacs/scaluq/pull/157" target="_blank" rel="noopener noreferrer">PR #157</a>）
+                    </li>
+                    <li>
+                        状態ベクトルのCPU/GPU切り替え機能
+                        （<a href="https://github.com/qulacs/scaluq/pull/200" target="_blank" rel="noopener noreferrer">PR #200</a>）
+                    </li>
+                    <li>
+                        状態ベクトルの精度変更機能
+                        （<a href="https://github.com/qulacs/scaluq/pull/177" target="_blank" rel="noopener noreferrer">PR #177</a>）
+                    </li>
+                    <li>
+                        複数の状態ベクトル計算を並列実行できるクラスの実装
+                        （<a href="https://github.com/qulacs/scaluq/pull/109" target="_blank" rel="noopener noreferrer">PR #109</a>）
+                    </li>
+                    <li>
+                        オブザーバブルによる計算を並列実行できるクラスの実装
+                        （<a href="https://github.com/qulacs/scaluq/pull/262" target="_blank" rel="noopener noreferrer">PR #262</a>）
+                    </li>
+                    <li>
+                        Python APIのドキュメント自動生成
+                        （<a href="https://github.com/qulacs/scaluq/pull/86" target="_blank" rel="noopener noreferrer">PR #86</a>）
+                    </li>
+                </ul>
+            </section>
+
+            <section class="panel reveal" style="--delay: 0.4s;">
+                <h2>Links</h2>
+                <ul class="detail-list">
+                    <li>
+                        <a href="https://github.com/gandalfr-KY" target="_blank" rel="noopener noreferrer">GitHub: gandalfr-KY</a>
+                    </li>
+                    <li>
+                        <a href="https://qiita.com/gandalfr-KY" target="_blank" rel="noopener noreferrer">Qiita: gandalfr-KY</a>
+                    </li>
+                    <li>
+                        <a href="https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202502243102339112" target="_blank" rel="noopener noreferrer">J-GLOBAL（SWoPP/HPC研究会の文献情報）</a>
+                    </li>
+                    <li>
+                        <a href="https://www.ipsj.or.jp/event/taikai/87/WEB/data/pdf/6J-06.html" target="_blank" rel="noopener noreferrer">情報処理学会第87回全国大会 アブストラクト</a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

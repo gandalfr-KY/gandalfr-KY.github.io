@@ -1,107 +1,152 @@
-document.getElementById('createInputsButton').addEventListener('click', function() {
-    const size = parseInt(document.getElementById('matrixSize').value);
-    const container = document.getElementById('inputContainer');
+const MAX_MATRIX_SIZE = 10;
+const MATRIX_INPUT_PREFIX = 'matrixInput';
 
-    if(size !== size || size > 10) {
-        alert("Please provide a square matrix with size up to 10x10.");
+const elements = {
+    matrixSize: document.getElementById('matrixSize'),
+    createInputsButton: document.getElementById('createInputsButton'),
+    inputContainer: document.getElementById('inputContainer'),
+    calculateButton: document.getElementById('calculateButton'),
+    result: document.getElementById('result'),
+    matrixContainer: document.getElementById('matrixContainer'),
+};
+
+function buildMatrixInputId(rowIndex, columnIndex) {
+    return `${MATRIX_INPUT_PREFIX}_${rowIndex}_${columnIndex}`;
+}
+
+function getMatrixSize() {
+    return parseInt(elements.matrixSize.value);
+}
+
+function createMatrixRow() {
+    const rowContainer = document.createElement('div');
+    rowContainer.className = 'matrix-row';
+    return rowContainer;
+}
+
+function focusMatrixInput(rowIndex, columnIndex) {
+    const nextInput = document.getElementById(buildMatrixInputId(rowIndex, columnIndex));
+    if (nextInput) {
+        nextInput.focus();
+    }
+}
+
+function handleMatrixInputKeydown(rowIndex, columnIndex, size) {
+    return function onMatrixInputKeydown(event) {
+        if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            focusMatrixInput(Math.min(rowIndex + 1, size - 1), columnIndex);
+            return;
+        }
+
+        if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            focusMatrixInput(Math.max(rowIndex - 1, 0), columnIndex);
+            return;
+        }
+
+        if (event.key === 'ArrowRight' && event.target.selectionStart === event.target.value.length) {
+            event.preventDefault();
+            focusMatrixInput(rowIndex, Math.min(columnIndex + 1, size - 1));
+            return;
+        }
+
+        if (event.key === 'ArrowLeft' && event.target.selectionStart === 0) {
+            event.preventDefault();
+            focusMatrixInput(rowIndex, Math.max(columnIndex - 1, 0));
+        }
+    };
+}
+
+function createEditableMatrixInput(rowIndex, columnIndex, size) {
+    const input = document.createElement('input');
+    input.id = buildMatrixInputId(rowIndex, columnIndex);
+    input.type = 'text';
+    input.size = 10;
+    input.placeholder = `Cell ${rowIndex}, ${columnIndex}`;
+    input.addEventListener('keydown', handleMatrixInputKeydown(rowIndex, columnIndex, size));
+    return input;
+}
+
+function createReadonlyMatrixInput(value) {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.size = 10;
+    input.value = value;
+    input.readOnly = true;
+    return input;
+}
+
+function renderInputMatrix(size) {
+    elements.inputContainer.innerHTML = '';
+
+    for (let rowIndex = 0; rowIndex < size; rowIndex++) {
+        const rowContainer = createMatrixRow();
+
+        for (let columnIndex = 0; columnIndex < size; columnIndex++) {
+            rowContainer.appendChild(createEditableMatrixInput(rowIndex, columnIndex, size));
+        }
+
+        elements.inputContainer.appendChild(rowContainer);
+    }
+}
+
+function fillMatrixFromInputs(matrix, size) {
+    let rowIndex = 0;
+    let columnIndex = 0;
+
+    try {
+        for (rowIndex = 0; rowIndex < size; rowIndex++) {
+            for (columnIndex = 0; columnIndex < size; columnIndex++) {
+                const input = document.getElementById(buildMatrixInputId(rowIndex, columnIndex));
+                const value = Module.stringToComplex(input.value);
+                matrix.set(rowIndex, columnIndex, value);
+            }
+        }
+    } catch (error) {
+        alert(`Cell (${rowIndex}, ${columnIndex}) の入力値が正しくありません。`);
+    }
+}
+
+function renderInverseMatrix(inverseMatrix, size) {
+    if (inverseMatrix.Height() != 0) {
+        for (let rowIndex = 0; rowIndex < size; rowIndex++) {
+            const rowContainer = createMatrixRow();
+
+            for (let columnIndex = 0; columnIndex < size; columnIndex++) {
+                const value = Module.complexToString(inverseMatrix.get(rowIndex, columnIndex));
+                rowContainer.appendChild(createReadonlyMatrixInput(value));
+            }
+
+            elements.matrixContainer.appendChild(rowContainer);
+        }
+    }
+}
+
+elements.createInputsButton.addEventListener('click', function onCreateInputsButtonClick() {
+    const size = getMatrixSize();
+
+    if (size !== size || size > MAX_MATRIX_SIZE) {
+        alert('Please provide a square matrix with size up to 10x10.');
         return;
     }
 
-    // Clear previous inputs
-    container.innerHTML = '';
-
-    for(let i = 0; i < size; i++) {
-        const rowContainer = document.createElement('div');
-        rowContainer.style.display = 'flex';
-        
-        for(let j = 0; j < size; j++) {
-            const input = document.createElement('input');
-            input.setAttribute('id', `matrixInput_${i}_${j}`);
-            input.setAttribute('type', 'text');
-            input.setAttribute('size', '10');
-            input.setAttribute('placeholder', `Cell ${i}, ${j}`);
-
-            // Add keydown event listener to the input
-            input.addEventListener('keydown', function(e) {
-                if(e.key === "ArrowDown") {
-                    e.preventDefault();
-                    let nextInput = document.getElementById(`matrixInput_${Math.min(i + 1, size - 1)}_${j}`);
-                    if(nextInput) nextInput.focus();
-                }
-                else if(e.key === "ArrowUp") {
-                    e.preventDefault();
-                    let nextInput = document.getElementById(`matrixInput_${Math.max(i - 1, 0)}_${j}`);
-                    if(nextInput) nextInput.focus();
-                }
-                else if(e.key === "ArrowRight") {
-                    if (e.target.selectionStart === this.value.length) {
-                        e.preventDefault();
-                        let nextInput = document.getElementById(`matrixInput_${i}_${Math.min(j + 1, size - 1)}`);
-                        if(nextInput) nextInput.focus();
-                    }
-                }
-                else if(e.key === "ArrowLeft") {
-                    if (e.target.selectionStart === 0) {
-                        e.preventDefault();
-                        let nextInput = document.getElementById(`matrixInput_${i}_${Math.max(j - 1, 0)}`);
-                        if(nextInput) nextInput.focus();
-                    }
-                }
-            });
-
-            rowContainer.appendChild(input);
-        }
-        container.appendChild(rowContainer);
-    }
+    renderInputMatrix(size);
 });
 
+elements.calculateButton.addEventListener('click', function onCalculateButtonClick() {
+    const size = getMatrixSize();
+    elements.matrixContainer.innerHTML = '';
 
-document.getElementById('calculateButton').addEventListener('click', function() {
-    const size = parseInt(document.getElementById('matrixSize').value);
-    const resultContainer = document.getElementById('result');
-    const matrixContainer = document.getElementById('matrixContainer');
-    // Clear previous results
-    matrixContainer.innerHTML = '';
-
-    let i = 0, j = 0;
     const matrix = new Module.Matrix(size, size);
-    try {
-        for(i = 0; i < size; i++) {
-            for(j = 0; j < size; j++) {
-                const tmp = Module.stringToComplex(document.getElementById(`matrixInput_${i}_${j}`).value);
-                matrix.set(i, j, tmp);
-            }
-        }
-    
-    } catch (e) {
-        // If an error occurs, display an alert with the error message
-        alert(`Cell (${i}, ${j}) の入力値が正しくありません。`);
-    }
-    
+    fillMatrixFromInputs(matrix, size);
 
     const result = matrix.determinant();
-    resultContainer.textContent = `Determinant: ${Module.complexToString(result)}`;
+    elements.result.textContent = `Determinant: ${Module.complexToString(result)}`;
 
-    const inv = matrix.inverse();
-    if (inv.Height() != 0) {
-        for(let i = 0; i < size; i++) {
-            const rowContainer = document.createElement('div');
-            rowContainer.style.display = 'flex';
-            
-            for(let j = 0; j < size; j++) {
-                const input = document.createElement('input');
-                input.setAttribute('type', 'text');
-                input.setAttribute('size', '10');
-                input.value = Module.complexToString(inv.get(i, j));
-                input.readOnly = true;
-                rowContainer.appendChild(input);
-            }
-            matrixContainer.appendChild(rowContainer);
-        }
-    }
-    
+    const inverseMatrix = matrix.inverse();
+    renderInverseMatrix(inverseMatrix, size);
+
     matrix.delete();
-
 });
-
 

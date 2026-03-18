@@ -1,10 +1,11 @@
 .result-box {
+    --result-text-color: #333;
     max-width: 500px;
     margin-top: 20px;
     padding: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    color: #333;
+    background-color: var(--page-background-color);
+    border: 1px solid var(--border-color);
+    color: var(--result-text-color);
     font-size: 18px;
     font-weight: bold;
 }

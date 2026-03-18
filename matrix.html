@@ -1,28 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix Operation Calculator</title>
     <link rel="stylesheet" type="text/css" href="/src/css/base_styles.css">
     <link rel="stylesheet" type="text/css" href="/src/css/resultbox.css">
+    <link rel="stylesheet" type="text/css" href="/src/css/matrix.css">
 </head>
 <body>
-    <a href="index.html">目次ページへ戻る</a>
-    <h1>行列演算</h1>
+    <main class="matrix-page">
+        <a href="index.html">目次ページへ戻る</a>
+        <h1>行列演算</h1>
 
-    <label for="matrixSize">サイズ:</label>
-    <input id="matrixSize" type="number" placeholder="Enter number of rows">
+        <label for="matrixSize">サイズ:</label>
+        <input id="matrixSize" type="number" placeholder="Enter number of rows">
 
-    <button id="createInputsButton">Create Matrix Inputs</button>
+        <button id="createInputsButton">Create Matrix Inputs</button>
 
-    <div id="inputContainer"></div>
+        <div id="inputContainer"></div>
 
-    <button id="calculateButton">calculate</button>
+        <button id="calculateButton">calculate</button>
 
-    <div id="result" class="result-box"></div>
-    <div id="matrixContainer"></div>
+        <div id="result" class="result-box"></div>
+        <div id="matrixContainer"></div>
+    </main>
 
     <script src="/build/matrix.js"></script>
     <script src="/src/js/matrix.js"></script>
-    
 </body>
 </html>

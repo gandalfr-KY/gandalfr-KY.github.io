@@ -1,6 +1,12 @@
+:root {
+    --page-background-color: #f0f0f0;
+    --button-background-color: #4CAF50;
+    --border-color: #ccc;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: var(--page-background-color);
     padding: 20px;
 }
 
@@ -10,12 +16,12 @@ input[type=number] {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
 }
 
 button {
     padding: 10px 20px;
-    background-color: #4CAF50; /* Green */
+    background-color: var(--button-background-color);
     border: none;
     color: white;
     text-align: center;
